@@ -76,6 +76,26 @@ elementary:
       threads: {{ target.threads }}
 {% endmacro %}
 
+{% macro athena__generate_elementary_cli_profile(method, elementary_database, elementary_schema) %}
+elementary:
+  outputs:
+    default:
+      type: "{{ target.type }}"
+      s3_staging_dir: "{{ target.s3_staging_dir }}"
+      region_name: "{{ target.region_name }}"
+      database: "{{ target.database }}"
+      aws_profile_name: "{{ target.aws_profile_name }}"
+      work_group: "{{ target.work_group }}"
+      aws_access_key_id: "<AWS_ACCESS_KEY_ID>"
+      aws_secret_access_key: "<AWS_SECRET_ACCESS_KEY>"
+      {%- if elementary_database %}
+      catalog: "{{ elementary_database }}"
+      {%- endif %}
+      schema: "{{ elementary_schema }}"
+      threads: {{ target.threads }}
+{% endmacro %}
+
+
 {% macro default__generate_elementary_cli_profile(method, elementary_database, elementary_schema) %}
 Adapter "{{ target.type }}" is not supported on Elementary.
 {% endmacro %}
