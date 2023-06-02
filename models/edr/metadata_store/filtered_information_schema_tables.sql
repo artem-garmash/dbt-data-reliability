@@ -1,7 +1,7 @@
 {{
   config(
-    materialized = 'view',
-    enabled = target.type != 'databricks' and target.type != 'spark' and target.type != 'athena' | as_bool()
+    materialized = 'table' if target.type == 'athena' else 'view',
+    enabled = target.type != 'databricks' and target.type != 'spark' | as_bool()
   )
 }}
 
