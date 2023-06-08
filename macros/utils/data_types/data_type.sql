@@ -43,6 +43,11 @@
     {% do return("string") %}
 {% endmacro %}
 
+{% macro athena__edr_type_string() %}
+    {% do return("varchar") %}
+{% endmacro %}
+
+
 
 
 {%- macro edr_type_long_string() -%}
