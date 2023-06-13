@@ -1,7 +1,7 @@
 {{
   config(
     materialized = 'view',
-    enabled = elementary.get_config_var('enable_dbt_columns') and target.type != 'databricks' and target.type != 'spark' | as_bool()
+    enabled = elementary.get_config_var('enable_dbt_columns') and target.type != 'databricks' and target.type != 'spark' and target.type != 'athena' | as_bool()
   )
 }}
 

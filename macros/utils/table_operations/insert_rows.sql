@@ -111,12 +111,22 @@
     {{- return(string_value | replace("'", "''")) -}}
 {%- endmacro -%}
 
+{%- macro athena__escape_special_chars(string_value) -%}
+    {{- return(string_value | replace("'", "''")) -}}
+{%- endmacro -%}
+
 {%- macro render_value(value) -%}
     {%- if value is defined and value is not none -%}
         {%- if value is number -%}
             {{- value -}}
         {%- elif value is string -%}
-            '{{- elementary.escape_special_chars(value) -}}'
+            {%- if value.startswith('cast(')  -%}
+              {{- value -}}
+            {%- elif value.startswith('coalesce(') -%}
+              {{- value -}}
+            {%- else -%}
+              '{{- elementary.escape_special_chars(value) -}}'
+            {%- endif -%}
         {%- elif value is mapping or value is sequence -%}
             '{{- elementary.escape_special_chars(tojson(value)) -}}'
         {%- else -%}
