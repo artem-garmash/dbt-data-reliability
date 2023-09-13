@@ -1,6 +1,6 @@
 {{
   config(
-    materialized = 'view',
+    materialized = 'table' if target.type == 'athena' else 'view',
   )
 }}
 

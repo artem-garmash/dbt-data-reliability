@@ -14,3 +14,8 @@
 {% macro bigquery__get_dbt_columns_materialized() %}
   {% do return("incremental") %}
 {% endmacro %}
+
+
+{% macro athena__get_dbt_columns_materialized() %}
+  {% do return("table") %}
+{% endmacro %}
